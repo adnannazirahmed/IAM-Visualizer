@@ -1,0 +1,47 @@
+{
+  "UserDetailList": [
+    {
+      "UserName": "Admin",
+      "Arn": "arn:aws:iam::123456789012:user/Admin",
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "AdministratorAccess",
+          "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+        }
+      ]
+    }
+  ],
+  "GroupDetailList": [],
+  "RoleDetailList": [],
+  "Policies": [
+    {
+      "PolicyName": "AdministratorAccess",
+      "PolicyId": "ANPAEXAMPLE2ADMIN",
+      "Arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 1,
+      "IsAttachable": true,
+      "PolicyVersionList": [
+        {
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "*"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

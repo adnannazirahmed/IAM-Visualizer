@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "account_id": "999888777666",
+    "generated_at": "2026-07-25T12:00:00Z",
+    "source": "static",
+    "node_count": 10,
+    "link_count": 8,
+    "escalation_count": 2
+  },
+  "nodes": [
+    {
+      "id": "user::attacker",
+      "type": "user",
+      "name": "attacker",
+      "arn": "arn:aws:iam::999888777666:user/attacker",
+      "risk_level": "critical",
+      "risk_score": 9.8,
+      "policies": [
+        {
+          "PolicyName": "PolicyCreatorInline",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "iam:CreatePolicyVersion",
+                  "iam:SetDefaultPolicyVersion"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion"],
+      "escalation_paths": ["esc-001"]
+    },
+    {
+      "id": "user::sec-auditor",
+      "type": "user",
+      "name": "sec-auditor",
+      "arn": "arn:aws:iam::999888777666:user/sec-auditor",
+      "risk_level": "low",
+      "risk_score": 1.5,
+      "policies": [
+        {
+          "PolicyName": "SecurityAuditAccess",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": ["config:Describe*", "securityhub:Get*"],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["config:Describe*", "securityhub:Get*"],
+      "escalation_paths": []
+    },
+    {
+      "id": "group::tier1-support",
+      "type": "group",
+      "name": "tier1-support",
+      "arn": "arn:aws:iam::999888777666:group/tier1-support",
+      "risk_level": "medium",
+      "risk_score": 4.5,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": []
+    },
+    {
+      "id": "policy::CreatePolicyVersionPolicy",
+      "type": "policy",
+      "name": "CreatePolicyVersionPolicy",
+      "arn": "arn:aws:iam::999888777666:policy/CreatePolicyVersionPolicy",
+      "risk_level": "critical",
+      "risk_score": 9.9,
+      "policies": [
+        {
+          "PolicyName": "CreatePolicyVersionPolicy",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": ["iam:CreatePolicyVersion"],
+                "Resource": "arn:aws:iam::999888777666:policy/*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["iam:CreatePolicyVersion"],
+      "escalation_paths": ["esc-001"]
+    },
+    {
+      "id": "role::iam-manager",
+      "type": "role",
+      "name": "iam-manager",
+      "arn": "arn:aws:iam::999888777666:role/iam-manager",
+      "risk_level": "critical",
+      "risk_score": 9.5,
+      "policies": [
+        {
+          "PolicyName": "PassRoleEC2",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": ["iam:PassRole", "ec2:RunInstances"],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["iam:PassRole", "ec2:RunInstances"],
+      "escalation_paths": ["esc-001", "esc-002"]
+    },
+    {
+      "id": "policy::PassRolePolicy",
+      "type": "policy",
+      "name": "PassRolePolicy",
+      "arn": "arn:aws:iam::999888777666:policy/PassRolePolicy",
+      "risk_level": "high",
+      "risk_score": 8.0,
+      "policies": [
+        {
+          "PolicyName": "PassRolePolicy",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": ["iam:PassRole"],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["iam:PassRole"],
+      "escalation_paths": ["esc-002"]
+    },
+    {
+      "id": "role::admin-role",
+      "type": "role",
+      "name": "admin-role",
+      "arn": "arn:aws:iam::999888777666:role/admin-role",
+      "risk_level": "critical",
+      "risk_score": 10.0,
+      "policies": [
+        {
+          "PolicyName": "AdministratorAccess",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": ["*"],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["*"],
+      "escalation_paths": ["esc-002"]
+    },
+    {
+      "id": "policy::FullAdminPolicy",
+      "type": "policy",
+      "name": "FullAdminPolicy",
+      "arn": "arn:aws:iam::999888777666:policy/FullAdminPolicy",
+      "risk_level": "critical",
+      "risk_score": 10.0,
+      "policies": [
+        {
+          "PolicyName": "FullAdminPolicy",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": ["*"],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "effective_permissions": ["*"],
+      "escalation_paths": []
+    },
+    {
+      "id": "role::ec2-deployer",
+      "type": "role",
+      "name": "ec2-deployer",
+      "arn": "arn:aws:iam::999888777666:role/ec2-deployer",
+      "risk_level": "high",
+      "risk_score": 7.5,
+      "policies": [],
+      "effective_permissions": ["ec2:*"],
+      "escalation_paths": []
+    },
+    {
+      "id": "resource::billing-vault",
+      "type": "resource",
+      "name": "billing-vault",
+      "arn": "arn:aws:kms:us-east-1:999888777666:key/billing-vault",
+      "risk_level": "high",
+      "risk_score": 8.5,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": []
+    }
+  ],
+  "links": [
+    {
+      "source": "user::attacker",
+      "target": "group::tier1-support",
+      "relationship": "member_of",
+      "permissions": ["iam:AddUserToGroup"],
+      "is_escalation": false,
+      "risk_level": "none",
+      "label": "member_of"
+    },
+    {
+      "source": "user::attacker",
+      "target": "policy::CreatePolicyVersionPolicy",
+      "relationship": "has_policy",
+      "permissions": ["iam:CreatePolicyVersion"],
+      "is_escalation": true,
+      "risk_level": "critical",
+      "label": "iam:CreatePolicyVersion"
+    },
+    {
+      "source": "policy::CreatePolicyVersionPolicy",
+      "target": "role::iam-manager",
+      "relationship": "can_assume",
+      "permissions": ["sts:AssumeRole"],
+      "is_escalation": true,
+      "risk_level": "critical",
+      "label": "Escalate to IAM Manager"
+    },
+    {
+      "source": "role::iam-manager",
+      "target": "policy::PassRolePolicy",
+      "relationship": "has_policy",
+      "permissions": ["iam:PassRole"],
+      "is_escalation": true,
+      "risk_level": "critical",
+      "label": "iam:PassRole"
+    },
+    {
+      "source": "role::iam-manager",
+      "target": "role::admin-role",
+      "relationship": "can_assume",
+      "permissions": ["iam:PassRole", "ec2:RunInstances"],
+      "is_escalation": true,
+      "risk_level": "critical",
+      "label": "PassRole → Admin"
+    },
+    {
+      "source": "role::admin-role",
+      "target": "policy::FullAdminPolicy",
+      "relationship": "has_policy",
+      "permissions": ["*"],
+      "is_escalation": false,
+      "risk_level": "critical",
+      "label": "has_policy"
+    },
+    {
+      "source": "role::admin-role",
+      "target": "resource::billing-vault",
+      "relationship": "can_access",
+      "permissions": ["kms:Decrypt", "kms:GenerateDataKey"],
+      "is_escalation": false,
+      "risk_level": "high",
+      "label": "can_access"
+    },
+    {
+      "source": "user::sec-auditor",
+      "target": "role::ec2-deployer",
+      "relationship": "can_assume",
+      "permissions": ["sts:AssumeRole"],
+      "is_escalation": false,
+      "risk_level": "low",
+      "label": "can_assume"
+    }
+  ],
+  "escalation_paths": [
+    {
+      "id": "esc-001",
+      "technique": "CreatePolicyVersion",
+      "risk": "critical",
+      "path": ["user::attacker", "policy::CreatePolicyVersionPolicy", "role::iam-manager"],
+      "required_permissions": ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion"],
+      "description": "User creates a new default policy version with wildcard permissions on attached policy to assume IAM Manager."
+    },
+    {
+      "id": "esc-002",
+      "technique": "PassRole + EC2 RunInstances",
+      "risk": "critical",
+      "path": ["role::iam-manager", "policy::PassRolePolicy", "role::admin-role"],
+      "required_permissions": ["iam:PassRole", "ec2:RunInstances"],
+      "description": "IAM Manager role passes Administrator role to EC2 instance launch, gaining admin access via instance credentials."
+    }
+  ]
+}

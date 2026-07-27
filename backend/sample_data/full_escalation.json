@@ -1,0 +1,49 @@
+{
+  "UserDetailList": [
+    {
+      "UserName": "Attacker",
+      "Arn": "arn:aws:iam::123456789012:user/Attacker",
+      "UserPolicyList": [
+        {
+          "PolicyName": "EscalatePol",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "iam:PassRole",
+                  "lambda:CreateFunction",
+                  "lambda:InvokeFunction"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "GroupDetailList": [],
+  "RoleDetailList": [
+    {
+      "RoleName": "AdminRole",
+      "Arn": "arn:aws:iam::123456789012:role/AdminRole",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::123456789012:user/Attacker"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    }
+  ],
+  "Policies": []
+}
