@@ -1,8 +1,8 @@
 import networkx as nx
 from typing import Dict, List, Any, Optional
 from src.models import (
-    IAMData, GraphOutput, GraphNode, GraphLink, NodeType, 
-    RelationshipType, RiskLevel, GraphMetadata, PolicyStatement, PolicyEffect, EscalationPath
+    IAMData, GraphOutput, GraphNode, GraphLink, NodeType,
+    RelationshipType, RiskLevel, GraphMetadata, PolicyStatement, PolicyEffect, EscalationPath, IAMRole
 )
 from src.policy_evaluator import PolicyEvaluator
 
@@ -74,8 +74,29 @@ class GraphBuilder:
                 type=NodeType.ROLE,
                 name=role.role_name,
                 arn=role.arn,
+                reachable=self._is_externally_reachable(role),
             )
             self._add_node(node)
+
+    def _is_externally_reachable(self, role: IAMRole) -> bool:
+        # False only if every Allow+sts:AssumeRole statement trusts exclusively
+        # AWS service principals (e.g. "sso.amazonaws.com") — meaning no AWS
+        # account, IAM user/role, or federated identity can ever assume this
+        # role, so it can never be a real attacker's starting point.
+        assume_statements = [
+            s for s in role.assume_role_policy_document.statements
+            if s.effect == PolicyEffect.ALLOW and "sts:AssumeRole" in s.actions
+        ]
+        if not assume_statements:
+            return True  # no trust info to go on — don't assume it's unreachable
+
+        for stmt in assume_statements:
+            if not stmt.principals:
+                return True
+            for principal in stmt.principals:
+                if not principal.endswith(".amazonaws.com"):
+                    return True  # an AWS account/user/role/federated principal is trusted
+        return False
             
     def _add_policies(self):
         for policy in self.iam_data.policies:

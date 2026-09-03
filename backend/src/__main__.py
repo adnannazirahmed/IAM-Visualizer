@@ -3,15 +3,14 @@ import sys
 import json
 from pathlib import Path
 
-from src.pipeline import load_sample, load_live, process_iam_data
+from src.pipeline import load_live, process_iam_data
 from src.iam_parser import IAMParser
 
 def main():
     parser = argparse.ArgumentParser(description="AWS IAM Privilege-Escalation Visualizer CLI")
-    
+
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("input", nargs="?", help="Path to input IAM JSON file")
-    group.add_argument("--sample", help="Name of the sample dataset to load")
     group.add_argument("--live", action="store_true", help="Fetch live data from AWS using boto3")
     
     parser.add_argument("--output", required=True, help="Path to save the output graph JSON")
@@ -23,10 +22,6 @@ def main():
             print("Fetching live IAM data...")
             iam_data = load_live()
             source_name = "live"
-        elif args.sample:
-            print(f"Loading sample dataset: {args.sample}...")
-            iam_data = load_sample(args.sample)
-            source_name = "sample"
         else:
             print(f"Parsing input file: {args.input}...")
             input_path = Path(args.input)

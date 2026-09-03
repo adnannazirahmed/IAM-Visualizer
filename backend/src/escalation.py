@@ -39,15 +39,26 @@ def action_matches(allowed_action: str, target_action: str) -> bool:
     regex = "^" + allowed_action.replace("*", ".*").replace("?", ".") + "$"
     return bool(re.match(regex, target_action, re.IGNORECASE))
 
+# AWS blocks direct modification of true service-linked roles at the API level
+# regardless of what the caller's own IAM policy allows — attaching/putting a
+# policy on one must go through the owning service, not iam:AttachRolePolicy et
+# al. directly. So permissions scoped only to this path can't actually be
+# exploited. This does NOT extend to aws-reserved/ (e.g. IAM Identity Center's
+# AWSReservedSSO_* permission-set roles) — AWS documents those as managed/synced
+# by the service, not protected against direct IAM API tampering.
+SERVICE_LINKED_ROLE_RESOURCE = re.compile(r"^arn:aws:iam::[^:]*:role/aws-service-role/", re.IGNORECASE)
+
 def has_permission(eff_perms: List[EffectivePermission], target_action: str) -> bool:
     for p in eff_perms:
         if p.effect == PolicyEffect.DENY:
             if action_matches(p.action, target_action):
                 return False
-                
+
     for p in eff_perms:
         if p.effect == PolicyEffect.ALLOW:
             if action_matches(p.action, target_action):
+                if SERVICE_LINKED_ROLE_RESOURCE.match(p.resource):
+                    continue
                 return True
     return False
 
@@ -73,9 +84,12 @@ def detect_escalation_paths(graph, effective_permissions_map: Dict[str, List[Eff
     paths: List[EscalationPath] = []
     
     for start_id in nodes_map:
-        if nodes_map[start_id].type not in ("user", "role", "group"):
+        start_node = nodes_map[start_id]
+        if start_node.type not in ("user", "role", "group"):
             continue
-            
+        if start_node.type == "role" and not start_node.reachable:
+            continue
+
         queue = collections.deque([(start_id, [start_id])])
         visited = {start_id}
         

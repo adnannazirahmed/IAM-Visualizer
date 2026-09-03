@@ -160,86 +160,51 @@ body {
   font-family: 'Fira Code', monospace;
 }
 
-/* Data Source Toggle */
-.data-source-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.source-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  letter-spacing: 0.05em;
-}
-
-.source-options {
-  display: flex;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 4px;
-  border-radius: 10px;
-  border: 1px solid var(--panel-border);
-}
-
-.source-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  padding: 6px 12px;
-  border-radius: 7px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.source-pill .pill-dot {
+.demo-indicator-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--text-muted);
+  background-color: var(--accent-purple);
+  box-shadow: 0 0 8px var(--accent-purple);
+  display: inline-block;
 }
 
-.source-pill:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
+.account-tag-demo {
+  border: 1px dashed rgba(139, 92, 246, 0.5);
 }
 
-.source-pill.active {
-  background: rgba(59, 130, 246, 0.2);
-  color: #60a5fa;
-  border: 1px solid rgba(59, 130, 246, 0.4);
+.account-tag-demo code {
+  color: var(--accent-purple);
+}
+
+/* Header Nav (page switcher) */
+.header-nav {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.nav-tab {
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-size: 0.85rem;
   font-weight: 600;
-}
-
-.source-pill.active .pill-dot {
-  background: #3b82f6;
-  box-shadow: 0 0 6px #3b82f6;
-}
-
-.source-pill.live-pill.active {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  border-color: rgba(239, 68, 68, 0.4);
-}
-
-.source-pill.live-pill.active .pill-dot {
-  background: #ef4444;
-  box-shadow: 0 0 6px #ef4444;
-}
-
-.pill-badge {
-  font-size: 0.65rem;
-  padding: 2px 5px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+}
+
+.nav-tab.active {
+  background: rgba(139, 92, 246, 0.18);
+  color: #f8fafc;
+  box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.4);
 }
 
 /* Search Bar Overlay */

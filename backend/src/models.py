@@ -171,6 +171,7 @@ class GraphNode(BaseModel):
     policies: list[str] = Field(default_factory=list)  # attached policy ARNs
     effective_permissions: list[str] = Field(default_factory=list)  # summarized for display
     escalation_paths: list[str] = Field(default_factory=list)  # escalation IDs
+    reachable: bool = True  # role nodes only: False if only an AWS service principal can assume this role
 
 
 class GraphLink(BaseModel):

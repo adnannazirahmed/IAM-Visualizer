@@ -1,0 +1,495 @@
+{
+  "metadata": {
+    "account_id": "778899001122",
+    "generated_at": "2026-08-10T09:15:00Z",
+    "source": "demo",
+    "node_count": 26,
+    "link_count": 21,
+    "escalation_count": 9
+  },
+  "nodes": [
+    {
+      "id": "user::alice.chen",
+      "type": "user",
+      "name": "alice.chen",
+      "arn": "arn:aws:iam::778899001122:user/alice.chen",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [
+        "Allow: ec2:* on *",
+        "Allow: s3:* on *",
+        "Allow: lambda:* on *",
+        "Allow: rds:* on *",
+        "Allow: dynamodb:* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "user::intern.dana",
+      "type": "user",
+      "name": "intern.dana",
+      "arn": "arn:aws:iam::778899001122:user/intern.dana",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [
+        "Allow: ec2:* on *",
+        "Allow: s3:* on *",
+        "Allow: lambda:* on *",
+        "Allow: rds:* on *",
+        "Allow: dynamodb:* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "user::bob.martinez",
+      "type": "user",
+      "name": "bob.martinez",
+      "arn": "arn:aws:iam::778899001122:user/bob.martinez",
+      "risk_level": "critical",
+      "risk_score": 1.0,
+      "policies": [],
+      "effective_permissions": [
+        "Allow: ec2:* on *"
+      ],
+      "escalation_paths": ["d9a4f2c1-5e77-4b0d-af40-9a1b5d8e0f43", "02d7c5f4-81aa-4e30-d273-2c4e800b1c76"],
+      "reachable": true
+    },
+    {
+      "id": "user::svc-ci-cd",
+      "type": "user",
+      "name": "svc-ci-cd",
+      "arn": "arn:aws:iam::778899001122:user/svc-ci-cd",
+      "risk_level": "critical",
+      "risk_score": 1.0,
+      "policies": [],
+      "effective_permissions": [
+        "Allow: ec2:* on *"
+      ],
+      "escalation_paths": ["e0b5a3d2-6f88-4c1e-b051-0a2c6e9f1a54", "13e8d6a5-92bb-4f41-e384-3d5f911c2d87"],
+      "reachable": true
+    },
+    {
+      "id": "user::contractor-temp",
+      "type": "user",
+      "name": "contractor-temp",
+      "arn": "arn:aws:iam::778899001122:user/contractor-temp",
+      "risk_level": "critical",
+      "risk_score": 1.0,
+      "policies": [
+        "arn:aws:iam::778899001122:policy/vendor-integration-policy",
+        "arn:aws:iam::778899001122:policy/vendor-integration-policy-editor"
+      ],
+      "effective_permissions": [
+        "Allow: execute-api:Invoke on arn:aws:execute-api:us-east-1:778899001122:vnd0123abc/*",
+        "Allow: iam:CreatePolicyVersion on arn:aws:iam::778899001122:policy/vendor-integration-policy",
+        "Allow: iam:SetDefaultPolicyVersion on arn:aws:iam::778899001122:policy/vendor-integration-policy"
+      ],
+      "escalation_paths": ["a3f1c9de-2b44-4e7a-9c1f-6d8e2a5b7c10", "b7e2d0af-3c55-4f8b-8d2e-7e9f3b6c8d21"],
+      "reachable": true
+    },
+    {
+      "id": "user::sec-auditor",
+      "type": "user",
+      "name": "sec-auditor",
+      "arn": "arn:aws:iam::778899001122:user/sec-auditor",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [
+        "Allow: config:Describe* on *",
+        "Allow: securityhub:Get* on *",
+        "Allow: cloudtrail:LookupEvents on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "group::developers",
+      "type": "group",
+      "name": "developers",
+      "arn": "arn:aws:iam::778899001122:group/developers",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::aws:policy/PowerUserAccess"],
+      "effective_permissions": [
+        "Allow: ec2:* on *",
+        "Allow: s3:* on *",
+        "Allow: lambda:* on *",
+        "Allow: rds:* on *",
+        "Allow: dynamodb:* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "group::devops-team",
+      "type": "group",
+      "name": "devops-team",
+      "arn": "arn:aws:iam::778899001122:group/devops-team",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::aws:policy/AmazonEC2FullAccess"],
+      "effective_permissions": [
+        "Allow: ec2:* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "group::security-team",
+      "type": "group",
+      "name": "security-team",
+      "arn": "arn:aws:iam::778899001122:group/security-team",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::aws:policy/SecurityAudit"],
+      "effective_permissions": [
+        "Allow: config:Describe* on *",
+        "Allow: securityhub:Get* on *",
+        "Allow: cloudtrail:LookupEvents on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "role::ci-deploy-role",
+      "type": "role",
+      "name": "ci-deploy-role",
+      "arn": "arn:aws:iam::778899001122:role/ci-deploy-role",
+      "risk_level": "critical",
+      "risk_score": 1.0,
+      "policies": ["arn:aws:iam::778899001122:policy/ci-deploy-permissions"],
+      "effective_permissions": [
+        "Allow: iam:PassRole on arn:aws:iam::778899001122:role/deploy-*",
+        "Allow: ec2:RunInstances on *",
+        "Allow: ec2:* on *",
+        "Allow: cloudformation:* on *",
+        "Allow: s3:PutObject on arn:aws:s3:::acme-deploy-artifacts/*"
+      ],
+      "escalation_paths": ["c8f3e1b0-4d66-4a9c-9e3f-8f0a4c7d9e32", "f1c6b4e3-7099-4d2f-c162-1b3d7f0a2b65"],
+      "reachable": true
+    },
+    {
+      "id": "role::admin-break-glass-role",
+      "type": "role",
+      "name": "admin-break-glass-role",
+      "arn": "arn:aws:iam::778899001122:role/admin-break-glass-role",
+      "risk_level": "critical",
+      "risk_score": 1.0,
+      "policies": ["arn:aws:iam::aws:policy/AdministratorAccess"],
+      "effective_permissions": [
+        "Allow: * on *"
+      ],
+      "escalation_paths": ["24f9e7b6-a3cc-4052-f495-4e6fa22d3e98"],
+      "reachable": true
+    },
+    {
+      "id": "role::readonly-audit-role",
+      "type": "role",
+      "name": "readonly-audit-role",
+      "arn": "arn:aws:iam::778899001122:role/readonly-audit-role",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::aws:policy/SecurityAudit", "arn:aws:iam::aws:policy/ViewOnlyAccess"],
+      "effective_permissions": [
+        "Allow: config:Describe* on *",
+        "Allow: securityhub:Get* on *",
+        "Allow: iam:GenerateCredentialReport on *",
+        "Allow: ec2:Describe* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "role::lambda-data-pipeline-role",
+      "type": "role",
+      "name": "lambda-data-pipeline-role",
+      "arn": "arn:aws:iam::778899001122:role/lambda-data-pipeline-role",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::778899001122:policy/data-pipeline-access"],
+      "effective_permissions": [
+        "Allow: s3:* on arn:aws:s3:::acme-raw-data-lake/*",
+        "Allow: dynamodb:* on arn:aws:dynamodb:us-east-1:778899001122:table/pipeline-state",
+        "Allow: logs:* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": false
+    },
+    {
+      "id": "role::cross-account-vendor-role",
+      "type": "role",
+      "name": "cross-account-vendor-role",
+      "arn": "arn:aws:iam::778899001122:role/cross-account-vendor-role",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::778899001122:policy/VendorMonitoringReadOnly"],
+      "effective_permissions": [
+        "Allow: cloudwatch:Get* on *",
+        "Allow: cloudwatch:List* on *",
+        "Allow: ec2:Describe* on *"
+      ],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "role::legacy-jenkins-role",
+      "type": "role",
+      "name": "legacy-jenkins-role",
+      "arn": "arn:aws:iam::778899001122:role/legacy-jenkins-role",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": ["arn:aws:iam::778899001122:policy/legacy-full-access"],
+      "effective_permissions": [
+        "Allow: iam:* on *",
+        "Allow: * on *"
+      ],
+      "escalation_paths": [],
+      "reachable": false
+    },
+    {
+      "id": "policy::PowerUserAccess",
+      "type": "policy",
+      "name": "PowerUserAccess",
+      "arn": "arn:aws:iam::aws:policy/PowerUserAccess",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::AmazonEC2FullAccess",
+      "type": "policy",
+      "name": "AmazonEC2FullAccess",
+      "arn": "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::SecurityAudit",
+      "type": "policy",
+      "name": "SecurityAudit",
+      "arn": "arn:aws:iam::aws:policy/SecurityAudit",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::ViewOnlyAccess",
+      "type": "policy",
+      "name": "ViewOnlyAccess",
+      "arn": "arn:aws:iam::aws:policy/ViewOnlyAccess",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::AdministratorAccess",
+      "type": "policy",
+      "name": "AdministratorAccess",
+      "arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::vendor-integration-policy",
+      "type": "policy",
+      "name": "vendor-integration-policy",
+      "arn": "arn:aws:iam::778899001122:policy/vendor-integration-policy",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::vendor-integration-policy-editor",
+      "type": "policy",
+      "name": "vendor-integration-policy-editor",
+      "arn": "arn:aws:iam::778899001122:policy/vendor-integration-policy-editor",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::ci-deploy-permissions",
+      "type": "policy",
+      "name": "ci-deploy-permissions",
+      "arn": "arn:aws:iam::778899001122:policy/ci-deploy-permissions",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::VendorMonitoringReadOnly",
+      "type": "policy",
+      "name": "VendorMonitoringReadOnly",
+      "arn": "arn:aws:iam::778899001122:policy/VendorMonitoringReadOnly",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::data-pipeline-access",
+      "type": "policy",
+      "name": "data-pipeline-access",
+      "arn": "arn:aws:iam::778899001122:policy/data-pipeline-access",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    },
+    {
+      "id": "policy::legacy-full-access",
+      "type": "policy",
+      "name": "legacy-full-access",
+      "arn": "arn:aws:iam::778899001122:policy/legacy-full-access",
+      "risk_level": "none",
+      "risk_score": 0.0,
+      "policies": [],
+      "effective_permissions": [],
+      "escalation_paths": [],
+      "reachable": true
+    }
+  ],
+  "links": [
+    { "source": "user::alice.chen", "target": "group::developers", "relationship": "member_of", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::intern.dana", "target": "group::developers", "relationship": "member_of", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::bob.martinez", "target": "group::devops-team", "relationship": "member_of", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::svc-ci-cd", "target": "group::devops-team", "relationship": "member_of", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::sec-auditor", "target": "group::security-team", "relationship": "member_of", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+
+    { "source": "group::developers", "target": "policy::PowerUserAccess", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "group::devops-team", "target": "policy::AmazonEC2FullAccess", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "group::security-team", "target": "policy::SecurityAudit", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::readonly-audit-role", "target": "policy::SecurityAudit", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::readonly-audit-role", "target": "policy::ViewOnlyAccess", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::admin-break-glass-role", "target": "policy::AdministratorAccess", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::contractor-temp", "target": "policy::vendor-integration-policy", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::contractor-temp", "target": "policy::vendor-integration-policy-editor", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::ci-deploy-role", "target": "policy::ci-deploy-permissions", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::cross-account-vendor-role", "target": "policy::VendorMonitoringReadOnly", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::lambda-data-pipeline-role", "target": "policy::data-pipeline-access", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::legacy-jenkins-role", "target": "policy::legacy-full-access", "relationship": "has_policy", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+
+    { "source": "user::bob.martinez", "target": "role::ci-deploy-role", "relationship": "can_assume", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::svc-ci-cd", "target": "role::ci-deploy-role", "relationship": "can_assume", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "role::ci-deploy-role", "target": "role::admin-break-glass-role", "relationship": "can_assume", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" },
+    { "source": "user::sec-auditor", "target": "role::readonly-audit-role", "relationship": "can_assume", "permissions": [], "is_escalation": false, "risk_level": "none", "label": "" }
+  ],
+  "escalation_paths": [
+    {
+      "id": "a3f1c9de-2b44-4e7a-9c1f-6d8e2a5b7c10",
+      "technique": "CreateNewPolicyVersion",
+      "risk": "critical",
+      "path": ["user::contractor-temp"],
+      "required_permissions": ["iam:CreatePolicyVersion"],
+      "description": "Create a new policy version to grant excessive permissions",
+      "affected_identity": "user::contractor-temp"
+    },
+    {
+      "id": "b7e2d0af-3c55-4f8b-8d2e-7e9f3b6c8d21",
+      "technique": "SetExistingDefaultPolicyVersion",
+      "risk": "critical",
+      "path": ["user::contractor-temp"],
+      "required_permissions": ["iam:SetDefaultPolicyVersion"],
+      "description": "Set an existing policy version as default",
+      "affected_identity": "user::contractor-temp"
+    },
+    {
+      "id": "c8f3e1b0-4d66-4a9c-9e3f-8f0a4c7d9e32",
+      "technique": "CreateEC2WithExistingIP",
+      "risk": "high",
+      "path": ["role::ci-deploy-role"],
+      "required_permissions": ["iam:PassRole", "ec2:RunInstances"],
+      "description": "Pass role to a new EC2 instance",
+      "affected_identity": "role::ci-deploy-role"
+    },
+    {
+      "id": "d9a4f2c1-5e77-4b0d-af40-9a1b5d8e0f43",
+      "technique": "CreateEC2WithExistingIP",
+      "risk": "high",
+      "path": ["user::bob.martinez", "role::ci-deploy-role"],
+      "required_permissions": ["iam:PassRole", "ec2:RunInstances"],
+      "description": "Pass role to a new EC2 instance",
+      "affected_identity": "user::bob.martinez"
+    },
+    {
+      "id": "e0b5a3d2-6f88-4c1e-b051-0a2c6e9f1a54",
+      "technique": "CreateEC2WithExistingIP",
+      "risk": "high",
+      "path": ["user::svc-ci-cd", "role::ci-deploy-role"],
+      "required_permissions": ["iam:PassRole", "ec2:RunInstances"],
+      "description": "Pass role to a new EC2 instance",
+      "affected_identity": "user::svc-ci-cd"
+    },
+    {
+      "id": "f1c6b4e3-7099-4d2f-c162-1b3d7f0a2b65",
+      "technique": "CreateNewPolicyVersion",
+      "risk": "critical",
+      "path": ["role::ci-deploy-role", "role::admin-break-glass-role"],
+      "required_permissions": ["iam:CreatePolicyVersion"],
+      "description": "Create a new policy version to grant excessive permissions",
+      "affected_identity": "role::ci-deploy-role"
+    },
+    {
+      "id": "02d7c5f4-81aa-4e30-d273-2c4e800b1c76",
+      "technique": "CreateNewPolicyVersion",
+      "risk": "critical",
+      "path": ["user::bob.martinez", "role::ci-deploy-role", "role::admin-break-glass-role"],
+      "required_permissions": ["iam:CreatePolicyVersion"],
+      "description": "Create a new policy version to grant excessive permissions",
+      "affected_identity": "user::bob.martinez"
+    },
+    {
+      "id": "13e8d6a5-92bb-4f41-e384-3d5f911c2d87",
+      "technique": "CreateNewPolicyVersion",
+      "risk": "critical",
+      "path": ["user::svc-ci-cd", "role::ci-deploy-role", "role::admin-break-glass-role"],
+      "required_permissions": ["iam:CreatePolicyVersion"],
+      "description": "Create a new policy version to grant excessive permissions",
+      "affected_identity": "user::svc-ci-cd"
+    },
+    {
+      "id": "24f9e7b6-a3cc-4052-f495-4e6fa22d3e98",
+      "technique": "CreateNewPolicyVersion",
+      "risk": "critical",
+      "path": ["role::admin-break-glass-role"],
+      "required_permissions": ["iam:CreatePolicyVersion"],
+      "description": "Create a new policy version to grant excessive permissions",
+      "affected_identity": "role::admin-break-glass-role"
+    }
+  ]
+}

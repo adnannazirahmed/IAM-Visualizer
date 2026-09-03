@@ -1,7 +1,9 @@
 import React from 'react';
-import DataSourceToggle from './DataSourceToggle';
+import { NavLink } from 'react-router-dom';
 
-export default function Header({ currentSource, onSourceChange, metadata }) {
+export default function Header({ metadata, mode = 'live' }) {
+  const isDemo = mode === 'demo';
+
   return (
     <header className="header glass-panel">
       <div className="header-brand">
@@ -15,18 +17,25 @@ export default function Header({ currentSource, onSourceChange, metadata }) {
         <div className="brand-text">
           <h1 className="header-title">AWS IAM Privilege Escalation Visualizer</h1>
           <div className="header-subtitle">
-            <span className="live-indicator-dot" />
-            Graph Security Analyzer
+            <span className={isDemo ? 'demo-indicator-dot' : 'live-indicator-dot'} />
+            {isDemo ? 'Demo Environment · Fictional Data' : 'Graph Security Analyzer'}
             {metadata?.account_id && (
-              <span className="account-tag">Account: <code>{metadata.account_id}</code></span>
+              <span className={`account-tag ${isDemo ? 'account-tag-demo' : ''}`}>
+                Account: <code>{metadata.account_id}</code>
+              </span>
             )}
           </div>
         </div>
       </div>
 
-      <div className="header-right">
-        <DataSourceToggle currentSource={currentSource} onSourceChange={onSourceChange} />
-      </div>
+      <nav className="header-nav">
+        <NavLink to="/" end className={({ isActive }) => `nav-tab ${isActive ? 'active' : ''}`}>
+          My Account
+        </NavLink>
+        <NavLink to="/demo" className={({ isActive }) => `nav-tab ${isActive ? 'active' : ''}`}>
+          Demo
+        </NavLink>
+      </nav>
     </header>
   );
 }

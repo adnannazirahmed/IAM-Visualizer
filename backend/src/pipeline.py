@@ -1,10 +1,6 @@
-import json
-import os
 from typing import Dict, List, Tuple
-from pathlib import Path
 
 from src.models import IAMData, GraphOutput, EffectivePermission
-from src.iam_parser import IAMParser
 from src.graph_builder import GraphBuilder
 from src.policy_evaluator import PolicyEvaluator
 from src.escalation import detect_escalation_paths
@@ -72,18 +68,6 @@ def process_iam_data(iam_data: IAMData) -> GraphOutput:
     graph_output.metadata.escalation_count = len(escalation_paths)
     
     return graph_output
-
-def load_sample(dataset_name: str) -> IAMData:
-    base_dir = Path(__file__).parent.parent
-    sample_path = base_dir / "sample_data" / f"{dataset_name}.json"
-    if not sample_path.exists():
-        raise FileNotFoundError(f"Sample dataset not found: {sample_path}")
-        
-    with open(sample_path, "r", encoding="utf-8") as f:
-        raw_data = json.load(f)
-        
-    parser = IAMParser()
-    return parser.parse(raw_data)
 
 def load_live() -> IAMData:
     exporter = AWSExporter()

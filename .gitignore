@@ -32,3 +32,10 @@ frontend/dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local Claude Code config
+.claude/
+CLAUDE.md
+
+# Miscellaneous
+HANDOFF.md

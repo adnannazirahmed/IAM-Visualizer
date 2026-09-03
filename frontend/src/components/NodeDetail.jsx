@@ -68,7 +68,7 @@ export default function NodeDetail({ node, graphData, onClose, onSelectNode }) {
           </span>
           {risk_score > 0 && (
             <span className="risk-score-value">
-              Score: {risk_score.toFixed(1)} / 10
+              Score: {(risk_score * 10).toFixed(1)} / 10
             </span>
           )}
         </div>
